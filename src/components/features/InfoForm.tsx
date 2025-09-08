@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import InputMask from 'react-input-mask';
+import { IMaskInput } from 'react-imask'; 
 import { postOcorrencia } from '../../services/personService';
 
 interface InfoFormProps {
@@ -45,41 +45,41 @@ const InfoForm = ({ personId }: InfoFormProps) => {
   };
 
   return (
-  <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-    <div>
-      <label htmlFor="dataHora" className="block text-sm font-medium text-gray-700">Data e Hora do Avistamento</label>
-      <InputMask
-        mask="99/99/9999 99:99"
-        id="dataHora"
-        value={dataHora}
-        onChange={(e) => setDataHora(e.target.value)}
-        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-        required
-      />
-    </div>
-    <div>
-      <label htmlFor="local" className="block text-sm font-medium text-gray-700">Local do Avistamento</label>
-      <input type="text" id="local" value={local} onChange={(e) => setLocal(e.target.value)} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required />
-    </div>
-    <div>
-      <label htmlFor="observacao" className="block text-sm font-medium text-gray-700">Observações Adicionais</label>
-      <textarea id="observacao" value={observacao} onChange={(e) => setObservacao(e.target.value)} rows={4} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"></textarea>
-    </div>
-    <div>
-      <label htmlFor="foto" className="block text-sm font-medium text-gray-700">Anexar Foto (Opcional)</label>
-      <input type="file" id="foto" onChange={handleFileChange} className="mt-1 block w-full" accept="image/*" />
-    </div>
-    <button type="submit" disabled={isSubmitting} className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 disabled:bg-blue-300">
-      {isSubmitting ? 'Enviando...' : 'Enviar Informação'}
-    </button>
+    <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+      <div>
+        <label htmlFor="dataHora" className="block text-sm font-medium text-gray-700">Data e Hora do Avistamento</label>
+        <IMaskInput
+          id="dataHora"
+          value={dataHora}
+          onAccept={(value) => setDataHora(String(value))}
+          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+          placeholder="DD/MM/AAAA HH:MM"
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="local" className="block text-sm font-medium text-gray-700">Local do Avistamento</label>
+        <input type="text" id="local" value={local} onChange={(e) => setLocal(e.target.value)} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required />
+      </div>
+      <div>
+        <label htmlFor="observacao" className="block text-sm font-medium text-gray-700">Observações Adicionais</label>
+        <textarea id="observacao" value={observacao} onChange={(e) => setObservacao(e.target.value)} rows={4} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"></textarea>
+      </div>
+      <div>
+        <label htmlFor="foto" className="block text-sm font-medium text-gray-700">Anexar Foto (Opcional)</label>
+        <input type="file" id="foto" onChange={handleFileChange} className="mt-1 block w-full" accept="image/*" />
+      </div>
+      <button type="submit" disabled={isSubmitting} className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 disabled:bg-blue-300">
+        {isSubmitting ? 'Enviando...' : 'Enviar Informação'}
+      </button>
 
-    {message && (
-      <p className={`mt-4 text-sm ${message.type === 'success' ? 'text-green-600' : 'text-red-600'}`}>
-        {message.text}
-      </p>
-    )}
-  </form>
-);
+      {message && (
+        <p className={`mt-4 text-sm ${message.type === 'success' ? 'text-green-600' : 'text-red-600'}`}>
+          {message.text}
+        </p>
+      )}
+    </form>
+  );
 };
 
 export default InfoForm;
