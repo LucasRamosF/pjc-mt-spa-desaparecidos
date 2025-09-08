@@ -13,21 +13,27 @@ const DetailsPage = () => {
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
-    if (!id) return;
-
-    const fetchPerson = async () => {
-      setIsLoading(true);
-      try {
-        const data = await getPersonById(id);
+  if (!id) return;
+  const fetchPerson = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const data = await getPersonById(id);
+      if (data) {
         setPerson(data);
-      } catch (err) {
-        setError('Pessoa não encontrada ou erro na API.');
-      } finally {
-        setIsLoading(false);
+      } else {
+        setError('Pessoa não encontrada.');
+        setPerson(null);
       }
-    };
-    fetchPerson();
-  }, [id]);
+    } catch (err) {
+      setError('Falha ao carregar os dados da pessoa.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  fetchPerson();
+}, [id]);
+
 
   if (isLoading) return <p>Carregando detalhes...</p>;
   if (error) return <p className="text-red-500">{error}</p>;

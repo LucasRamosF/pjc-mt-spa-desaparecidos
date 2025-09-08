@@ -1,69 +1,90 @@
-# React + TypeScript + Vite
+# PJC-MT: SPA de Consulta a Pessoas Desaparecidas (Integração API)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esta é uma Single Page Application (SPA) desenvolvida em React com TypeScript, que consome a API da Polícia Judiciária Civil de Mato Grosso para consulta de registros de pessoas desaparecidas.
 
-Currently, two official plugins are available:
+**Esta branch (`feat/api-integration`) contém a implementação que se conecta diretamente à API oficial.**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+### **Dados de Inscrição**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* **Nome:** `Lucas Ramos Fagundes`
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### **Features**
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+* Visualização de registros de pessoas desaparecidas e localizadas em formato de cards.
+* Busca dinâmica por nome.
+* Paginação para navegação entre os registros.
+* Página de detalhes para cada registro com informações completas.
+* Formulário para envio de novas informações (avistamentos), incluindo observações, localização e fotos.
+* Interface responsiva e intuitiva.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### **Tecnologias Utilizadas**
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+* **React 18** com **Vite**
+* **TypeScript**
+* **Tailwind CSS** para estilização
+* **Axios** para requisições HTTP
+* **React Router DOM** para roteamento
+* **React IMask** para máscaras de formulário
+* **Docker** e **Docker Compose** para containerização
+
+---
+
+### **Pré-requisitos**
+
+* [Node.js](https://nodejs.org/en) (v18 ou superior)
+* [Docker](https://www.docker.com/products/docker-desktop/)
+
+---
+
+### **Instalação e Execução**
+
+#### **1. Configuração do Ambiente**
+
+Antes de iniciar, é necessário configurar o token de acesso à API.
+
+1.  Na raiz do projeto, crie um arquivo chamado `.env`.
+2.  Dentro deste arquivo, adicione a seguinte linha, substituindo `SEU_TOKEN_AQUI` pelo token de autorização fornecido pela API:
+    ```
+    VITE_API_TOKEN=SEU_TOKEN_AQUI
+    ```
+
+#### **2. Execução com Docker**
+
+1.  Clone o repositório e entre na branch correta:
+    ```bash
+    git clone [https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git](https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git)
+    cd SEU-REPOSITORIO
+    git checkout feat/api-integration
+    ```
+
+2.  Construa a imagem e inicie o container:
+    ```bash
+    docker-compose up --build
+    ```
+
+3.  A aplicação estará disponível em **`http://localhost:8080`**.
+
+#### **3. Execução Local (Desenvolvimento)**
+
+1.  Clone o repositório, entre na branch e instale as dependências:
+    ```bash
+    git clone [https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git](https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git)
+    cd SEU-REPOSITORIO
+    git checkout feat/api-integration
+    npm install
+    ```
+
+2.  Siga o **Passo 1 de Configuração do Ambiente** para criar seu arquivo `.env`.
+
+3.  Inicie o servidor de desenvolvimento:
+    ```bash
+    npm run dev
+    ```
+
+4.  A aplicação estará disponível em **`http://localhost:5173`**.
