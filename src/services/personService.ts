@@ -1,4 +1,4 @@
-import type { Person, OcorrenciaPayload, PaginatedResponse } from '../types';
+import type { Person, PaginatedResponse } from '../types';
 import { mockPeople } from '../_mockData';
 
 interface GetPeopleParams {

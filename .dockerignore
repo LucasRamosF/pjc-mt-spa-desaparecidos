@@ -1,0 +1,13 @@
+node_modules
+
+# Arquivos de log e de build local
+npm-debug.log
+dist
+.vite
+
+# Arquivos de ambiente locais
+.env
+
+# Configurações de IDE
+.vscode
+.idea

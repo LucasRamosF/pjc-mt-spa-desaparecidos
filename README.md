@@ -1,69 +1,94 @@
-# React + TypeScript + Vite
+# PJC-MT: SPA de Consulta a Pessoas Desaparecidas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto é uma Single Page Application (SPA) desenvolvida em React com TypeScript, que consome a API da Polícia Judiciária Civil de Mato Grosso para consulta de registros de pessoas desaparecidas.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### **Dados de Inscrição**
 
-## Expanding the ESLint configuration
+* **Nome:** `Lucas Ramos Fagundes`
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### **Features**
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+* Visualização de registros de pessoas desaparecidas e localizadas em formato de cards.
+* Busca dinâmica por nome.
+* Paginação para navegação entre os registros.
+* Página de detalhes para cada registro com informações completas.
+* Formulário para envio de novas informações (avistamentos), incluindo observações, localização e fotos.
+* Interface responsiva e intuitiva.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### **Nota Sobre a Fonte de Dados (API vs. Mock)**
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+O objetivo inicial deste projeto era consumir em tempo real a API de Pessoas Desaparecidas da PJC-MT. A integração inicial foi desenvolvida e pode ser encontrada na branch `feat/api-integration`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+No entanto, durante o desenvolvimento, a API apresentou instabilidade, retornando erros `500 (Internal Server Error)` de forma consistente, o que impediu o funcionamento da aplicação.
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Para garantir a entrega de um projeto funcional e demonstrar todas as funcionalidades de front-end exigidas, foi implementada uma camada de serviço mockada. A versão funcional da aplicação, presente na branch `main`, utiliza essa camada de dados simulados, que simula a busca e a paginação.
+
+---
+
+### **Tecnologias Utilizadas**
+
+* **React 18** com **Vite**
+* **TypeScript**
+* **Tailwind CSS** para estilização
+* **Axios** para requisições HTTP
+* **React Router DOM** para roteamento
+* **React IMask** para máscaras de formulário
+* **Docker** e **Docker Compose** para containerização
+
+---
+
+### **Pré-requisitos**
+
+* [Node.js](https://nodejs.org/en) (v18 ou superior)
+* [Docker](https://www.docker.com/products/docker-desktop/)
+
+---
+
+### **Instalação e Execução**
+
+#### **Opção 1: Usando Docker**
+
+1.  Clone o repositório:
+    ```bash
+    git clone [https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git](https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git)
+    cd SEU-REPOSITORIO
+    ```
+
+2.  Construa a imagem e inicie o container:
+    ```bash
+    docker-compose up --build
+    ```
+
+3.  A aplicação estará disponível em **`http://localhost:8080`**.
+
+#### **Opção 2: Execução Local (Desenvolvimento)**
+
+1.  Clone o repositório e instale as dependências:
+    ```bash
+    git clone [https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git](https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git)
+    cd SEU-REPOSITORIO
+    npm install
+    ```
+
+2.  Crie um arquivo `.env` na raiz do projeto e adicione o token da API (se aplicável):
+    ```
+    VITE_API_TOKEN=SEU_TOKEN_AQUI
+    ```
+
+3.  Inicie o servidor de desenvolvimento:
+    ```bash
+    npm run dev
+    ```
+
+4.  A aplicação estará disponível em **`http://localhost:5173`**.
+
+---
+
+### **Estrutura de Branches**
+
+* **`main`**: Contém a versão estável e funcional do projeto, utilizando a camada de serviços **mockada**.
+* **`feat/integracao-api`**: Contém o código original da integração com a **API**, mantido como registro histórico.
